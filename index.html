@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .calculator {
+            max-width: 320px;
+            margin: 50px auto;
+            background-color: #f8c9d4; /* Pink background */
+            border-radius: 15px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .calculator-screen {
+            width: 100%;
+            height: 80px;
+            margin-bottom: 15px;
+            font-size: 2em;
+            text-align: right;
+            border: none;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #ffffff; /* White background for the screen */
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .btn {
+            font-size: 1.5em;
+            border-radius: 10px;
+        }
+        .btn-outline-primary {
+            color: #ff66b2;
+            border-color: #ff66b2;
+        }
+        .btn-outline-primary:hover {
+            background-color: #ff66b2;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <div class="calculator-screen" id="display">0</div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="clearDisplay()">C</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('/')">/</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('*')">*</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('%')">%</button>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('7')">7</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('8')">8</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('9')">9</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('-')">-</button>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('4')">4</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('5')">5</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('6')">6</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('+')">+</button>
+                </div>
+            </div>
+            <div class="row mb-2">
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('1')">1</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('2')">2</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('3')">3</button>
+                </div>
+                <div class="col-3">
+                    <button class="btn btn-outline-primary btn-block" onclick="calculateResult()">=</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('0')">0</button>
+                </div>
+                <div class="col-6">
+                    <button class="btn btn-outline-primary btn-block" onclick="appendToDisplay('.')">.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Function to append a value (button press) to the display
+        function appendToDisplay(value) {
+            let display = document.getElementById('display');
+            // Clear the display if it shows '0' or 'Error'
+            if (display.innerText === '0' || display.innerText === 'Error') {
+                display.innerText = '';
+            }
+            // Append the clicked button value to the display
+            display.innerText += value;
+        }
+
+        // Function to clear the display
+        function clearDisplay() {
+            document.getElementById('display').innerText = '0';
+        }
+
+        // Function to calculate and display the result
+        function calculateResult() {
+            let display = document.getElementById('display');
+            try {
+                // Evaluate the expression on the display
+                display.innerText = eval(display.innerText);
+            } catch {
+                // Display 'Error' if the expression is invalid
+                display.innerText = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
